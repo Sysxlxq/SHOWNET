@@ -8,12 +8,14 @@ import { presetUno } from 'unocss'
 
 // https://vite.dev/config/
 export default defineConfig({
+  base: '/', 
   plugins: [
     vue(),
     vueDevTools(),
     Unocss({
       presets: [presetUno()]
-    })
+    }),
+    
   ],
   resolve: {
     alias: {
