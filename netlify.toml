@@ -1,5 +1,17 @@
 [[redirects]]
+  from = "http://zhengyunxcl.com/*"
+  to = "https://ornate-pegasus-d6fe03.netlify.app/:splat"
+  status = 301
+  force = true
+  conditions = {Country = ["cn"]}  # 仅对中国大陆访客跳转
+
+[[redirects]]
   from = "https://zhengyunxcl.com/*"
   to = "https://ornate-pegasus-d6fe03.netlify.app/:splat"
-  status = 302
+  status = 307  # 临时跳转避免SEO影响
   force = true
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
