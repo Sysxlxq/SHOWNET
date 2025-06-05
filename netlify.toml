@@ -1,4 +1,5 @@
 [[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
+  from = "https://zhengyunxcl.com/*"
+  to = "https://ornate-pegasus-d6fe03.netlify.app/:splat"
+  status = 302
+  force = true
