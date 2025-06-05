@@ -56,9 +56,7 @@
             </svg>
           </div>
           <h3>销售咨询</h3>
-          <div class="copy-text" @click="copyToClipboard('电话: 13370535205')">
-            <span>电话: 13370535205</span>
-          </div>
+          <p class="copy-text">电话: 13370535205</p>
         </div>
         <div class="contact-card">
           <div class="contact-icon">
@@ -68,9 +66,7 @@
             </svg>
           </div>
           <h3>企业邮箱</h3>
-          <div class="copy-text" @click="copyToClipboard('bellaliu_yingcheng@163.com')">
-            <span>bellaliu_yingcheng@163.com</span>
-          </div>
+          <p class="copy-text">bellaliu_yingcheng@163.com</p>
         </div>
         <div class="contact-card">
           <div class="contact-icon">
@@ -80,9 +76,7 @@
             </svg>
           </div>
           <h3>公司地址</h3>
-          <div class="copy-text" @click="copyToClipboard('中国（山东）自由贸易试验区济南片区会展西路88号1号楼')">
-            <span>中国（山东）自由贸易试验区济南片区会展西路88号1号楼</span>
-          </div>
+          <p class="copy-text">中国（山东）自由贸易试验区济南片区会展西路88号1号楼</p>
         </div>
       </div>
     </section>
@@ -161,14 +155,6 @@ const threeProducts = allProducts.slice(4);
 
 const goToProductDetail = (productId) => {
   router.push(`/products/${productId}`);
-};
-
-const copyToClipboard = (text) => {
-  navigator.clipboard.writeText(text).then(() => {
-    alert('已复制到剪贴板！');
-  }, (err) => {
-    console.error('复制失败:', err);
-  });
 };
 
 onMounted(() => {
@@ -402,7 +388,7 @@ body {
   transition: all 0.3s;
   position: relative;
   z-index: 2;
-  max-width: 300px; /* 添加固定宽度 */
+  max-width: 300px;
 }
 .contact-card:hover {
   transform: scale(1.05);
@@ -426,14 +412,11 @@ body {
 
 /* 复制文本的样式 */
 .copy-text {
-  user-select: none;
-  cursor: pointer;
+  user-select: text;
+  cursor: text;
   margin-top: 10px;
   font-size: 1.05rem;
   color: black;
-  width: 100%;
-  padding: 10px;
-  box-sizing: border-box;
 }
 
 /* 响应式设计 */
