@@ -56,7 +56,7 @@
             </svg>
           </div>
           <h3>销售咨询</h3>
-          <p>电话: 13305316735</p>
+          <p>电话: 13370535205</p>
         </div>
         <div class="contact-card">
           <div class="contact-icon">
