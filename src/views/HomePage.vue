@@ -56,7 +56,9 @@
             </svg>
           </div>
           <h3>销售咨询</h3>
-          <p>电话: 13370535205</p>
+          <div class="copy-text" @click="copyToClipboard('电话: 13370535205')">
+            <span>电话: 13370535205</span>
+          </div>
         </div>
         <div class="contact-card">
           <div class="contact-icon">
@@ -66,7 +68,9 @@
             </svg>
           </div>
           <h3>企业邮箱</h3>
-          <p>bellaliu_yingcheng@163.com</p>
+          <div class="copy-text" @click="copyToClipboard('bellaliu_yingcheng@163.com')">
+            <span>bellaliu_yingcheng@163.com</span>
+          </div>
         </div>
         <div class="contact-card">
           <div class="contact-icon">
@@ -76,8 +80,9 @@
             </svg>
           </div>
           <h3>公司地址</h3>
-          <p>中国（山东）自由贸易试验区</p>
-          <p>济南片区会展西路88号1号楼</p>
+          <div class="copy-text" @click="copyToClipboard('中国（山东）自由贸易试验区济南片区会展西路88号1号楼')">
+            <span>中国（山东）自由贸易试验区济南片区会展西路88号1号楼</span>
+          </div>
         </div>
       </div>
     </section>
@@ -158,53 +163,63 @@ const goToProductDetail = (productId) => {
   router.push(`/products/${productId}`);
 };
 
+const copyToClipboard = (text) => {
+  navigator.clipboard.writeText(text).then(() => {
+    alert('已复制到剪贴板！');
+  }, (err) => {
+    console.error('复制失败:', err);
+  });
+};
+
 onMounted(() => {
-  const script = document.createElement('script');
-  script.src = 'https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js';
-  script.onload = () => {
-    particlesJS('particles-js', {
-      particles: {
-        number: { value: 100, density: { enable: true, value_area: 800 } },
-        color: { value: '#00F7FF' },
-        shape: { type: 'circle' },
-        opacity: { value: 0.7, random: true },
-        size: { value: 4, random: true },
-        line_linked: { 
-          enable: true, 
-          distance: 150, 
-          color: '#00F7FF', 
-          opacity: 0.4, 
-          width: 1 
-        },
-        move: { 
-          enable: true, 
-          speed: 3, 
-          direction: 'none', 
-          random: true, 
-          straight: false, 
-          out_mode: 'out' 
-        }
-      },
-      interactivity: {
-        events: { 
-          onhover: { 
+  setTimeout(() => {
+    const script = document.createElement('script');
+    script.src = 'https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js';
+    script.onload = () => {
+      particlesJS('particles-js', {
+        particles: {
+          number: { value: 100, density: { enable: true, value_area: 800 } },
+          color: { value: '#00F7FF' },
+          shape: { type: 'circle' },
+          opacity: { value: 0.7, random: true },
+          size: { value: 4, random: true },
+          line_linked: { 
             enable: true, 
-            mode: 'bubble' 
-          } 
+            distance: 150, 
+            color: '#00F7FF', 
+            opacity: 0.4, 
+            width: 1 
+          },
+          move: { 
+            enable: true, 
+            speed: 3, 
+            direction: 'none', 
+            random: true, 
+            straight: false, 
+            out_mode: 'out' 
+          }
         },
-        modes: {
-          bubble: { 
-            distance: 200, 
-            size: 6, 
-            duration: 2, 
-            opacity: 0.8, 
-            speed: 3 
+        interactivity: {
+          events: { 
+            onhover: { 
+              enable: true, 
+              mode: 'bubble' 
+            } 
+          },
+          modes: {
+            bubble: { 
+              distance: 200, 
+              size: 6, 
+              duration: 2, 
+              opacity: 0.8, 
+              speed: 3 
+            }
           }
         }
-      }
-    });
-  };
-  document.head.appendChild(script);
+      });
+    };
+    document.head.appendChild(script);
+  }, 1000);
 
   setInterval(() => {
     isShowingFirstPage.value = !isShowingFirstPage.value;
@@ -361,9 +376,11 @@ body {
 /* 联系方式强化区 */
 .contact-section {
   padding: 60px 10%;
+  z-index: 1;
   background: linear-gradient(135deg, #0A2463, #003366);
   text-align: center;
   border-top: 1px solid rgba(0, 180, 255, 0.3);
+  position: relative;
 }
 .contact-section h2 {
   font-size: 2.2rem;
@@ -383,16 +400,21 @@ body {
   padding: 25px;
   min-width: 250px;
   transition: all 0.3s;
+  position: relative;
+  z-index: 2;
+  max-width: 300px; /* 添加固定宽度 */
 }
 .contact-card:hover {
   transform: scale(1.05);
-  background: rgba(0, 90, 80, 0.7);
+  box-shadow: 0 15px 30px rgba(0, 90, 170, 0.4);
+  border-color: #00B4FF;
 }
 .contact-card h3 {
   color: #ff5252;
   margin-top: 0;
 }
 .contact-card p {
+  z-index: 2;
   margin: 10px 0;
   color: black;
 }
@@ -400,6 +422,18 @@ body {
   font-size: 2rem;
   color: #ff5252;
   margin-bottom: 15px;
+}
+
+/* 复制文本的样式 */
+.copy-text {
+  user-select: none;
+  cursor: pointer;
+  margin-top: 10px;
+  font-size: 1.05rem;
+  color: black;
+  width: 100%;
+  padding: 10px;
+  box-sizing: border-box;
 }
 
 /* 响应式设计 */
