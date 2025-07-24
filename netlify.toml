@@ -22,4 +22,4 @@
   to = "/index.html"
   status = 200
   # 添加排除规则
-  conditions = {Path = ["!*.xml", "!*.txt", "!*.json"]}
+  conditions = {Path = ["!*.xml", "!*.txt", "!*.json", "!*.html"]}
