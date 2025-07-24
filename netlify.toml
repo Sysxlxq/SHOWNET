@@ -1,25 +1,28 @@
-# 新增：白名单规则（必须放在最前面）
+# 最终生效的netlify.toml
 [[redirects]]
   from = "/BingSiteAuth.xml"
   to = "/BingSiteAuth.xml"
   status = 200
-  force = false  # 禁用强制跳转
+  force = false
 
-# 中国大陆用户特殊处理（需在全局HTTPS规则前）
 [[redirects]]
   from = "http://zhengyunxcl.com/*"
   to = "https://ornate-pegasus-d6fe03.netlify.app/:splat"
-  status = 307  # 改为临时重定向
+  status = 307
   force = true
   conditions = {Country = ["cn"]}
 
-# 主域名HTTPS保留（去除跳转）
-# [!] 删除原第二个跳转到子域名的规则
-
-# SPA路由（需排除静态文件）
+# SPA核心路由修正（关键修改点）
 [[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
-  # 添加排除规则
-  conditions = {Path = ["!*.xml", "!*.txt", "!*.json", "!*.html"]}
+  # 修改为正则表达式排除
+  conditions = {Path = "!(^/.*\\.(xml|txt|json|html)$)"}
+
+# 新增静态资源直连规则（提升性能）
+[[redirects]]
+  from = "/static/*"
+  to = "/static/:splat"
+  status = 200
+  force = false
