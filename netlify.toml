@@ -1,28 +1,17 @@
-# 最终生效的netlify.toml
 [[redirects]]
-  from = "/BingSiteAuth.xml"
-  to = "/BingSiteAuth.xml"
-  status = 200
-  force = false
+from = "http://zhengyunxcl.com/*"
+to = "https://ornate-pegasus-d6fe03.netlify.app/:splat"
+status = 301
+force = true
+conditions = {Country = ["cn"]} # 仅对中国大陆访客跳转
 
 [[redirects]]
-  from = "http://zhengyunxcl.com/*"
-  to = "https://ornate-pegasus-d6fe03.netlify.app/:splat"
-  status = 307
-  force = true
-  conditions = {Country = ["cn"]}
+from = "https://zhengyunxcl.com/*"
+to = "https://ornate-pegasus-d6fe03.netlify.app/:splat"
+status = 307 # 临时跳转避免SEO影响
+force = true
 
-# SPA核心路由修正（关键修改点）
 [[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
-  # 修改为正则表达式排除
-  conditions = {Path = "!(^/.*\\.(xml|txt|json|html)$)"}
-
-# 新增静态资源直连规则（提升性能）
-[[redirects]]
-  from = "/static/*"
-  to = "/static/:splat"
-  status = 200
-  force = false
+from = "/*"
+to = "/index.html"
+status = 200
